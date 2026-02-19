@@ -4,6 +4,7 @@ from pydantic import BaseModel
 app = FastAPI()
 
 class AddCars(BaseModel):
+    id:int
     nomi: str
     modeli: int
     narxi: int
@@ -133,7 +134,7 @@ cars = {
 }
 
 
-app.get("/api")
+@app.get("/api")
 def get_cars():
     return cars
 @app.post("/api/add/{car_id}")
@@ -150,5 +151,9 @@ def delete_car(car_id: int):
 def update_car(car_id: int, car: AddCars):
     if car_id in cars:
         cars[car_id] = car.dict()
-        return {"message": "Yangilandi", "car": cars[car_id]}
-    return {"error": "Topilmadi"}
+        return {"message":"Yangilandi",}
+    return {"error":"Topilmadi"}
+        
+
+
+    
